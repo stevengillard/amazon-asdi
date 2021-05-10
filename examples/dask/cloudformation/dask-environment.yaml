@@ -40,6 +40,16 @@ Parameters:
       - 'YES'
       - 'NO'
 
+  DaskDashboardPort:
+    Type: Number
+    Default: 8787
+    Description: Port number to use for dask dashboard HTTP interface
+
+  AllowedIPRange:
+    Type: String
+    Default: 0.0.0.0/0
+    Description: IP range to allow access through the security groups
+
 Conditions:
   DaskWorkerSpotPricingCondition: !Equals [!Ref DaskWorkerSpotPricing, 'YES']
 
@@ -247,7 +257,7 @@ Resources:
             - dask-scheduler
             - --dashboard
             - --dashboard-address
-            - '8787'
+            - !Ref DaskDashboardPort
           Cpu: 4096
           Essential: true
           Image: !Ref DaskImage
@@ -335,11 +345,11 @@ Resources:
           Description: Allow all outbound traffic by default
           IpProtocol: "-1"
       SecurityGroupIngress:
-        - CidrIp: 0.0.0.0/0
+        - CidrIp: !Ref AllowedIPRange
           Description: Allow access to the dask dashboard
-          FromPort: 8787
+          FromPort: !Ref DaskDashboardPort
           IpProtocol: tcp
-          ToPort: 8787
+          ToPort: !Ref DaskDashboardPort
         - SourceSecurityGroupId: !GetAtt NotebookSecurityGroup.GroupId
           Description: Allow access from SageMaker notebook
           FromPort: 8786

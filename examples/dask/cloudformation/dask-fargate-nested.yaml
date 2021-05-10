@@ -19,11 +19,13 @@ Metadata:
           - SagemakerCodeRepo
           - SagemakerNotebookInstance
       - Label:
-          default: Dask worker task settings
+          default: Dask environment settings
         Parameters:
           - UseSpotPricing
           - DaskWorkerCPU
           - DaskWorkerMemory
+          - DaskDashboardPort
+          - AllowedIPRange
       - Label:
           default: Build settings
         Parameters:
@@ -122,6 +124,16 @@ Parameters:
     Default: '8192'
     Description: Amount of memory in MiB to allocate to each dask worker task
 
+  DaskDashboardPort:
+    Type: Number
+    Default: 8787
+    Description: Port number to use for dask dashboard HTTP interface
+
+  AllowedIPRange:
+    Type: String
+    Default: 0.0.0.0/0
+    Description: IP range to allow access to dask dashboard
+
 Mappings:
   FargateCPUMap:
     '1':
@@ -163,6 +175,8 @@ Resources:
         DaskWorkerSpotPricing: !Ref UseSpotPricing
         DaskWorkerCPU: !FindInMap [FargateCPUMap, !Ref DaskWorkerCPU, 'Value']
         DaskWorkerMemory: !Ref DaskWorkerMemory
+        DaskDashboardPort: !Ref DaskDashboardPort
+        AllowedIPRange: !Ref AllowedIPRange
 
   # Below are used when deploying from a local copy of the templates, via the AWS CLI
   # with 'aws cloudformation package' and 'aws cloudformation deploy'
@@ -190,6 +204,8 @@ Resources:
         DaskWorkerSpotPricing: !Ref UseSpotPricing
         DaskWorkerCPU: !FindInMap [FargateCPUMap, !Ref DaskWorkerCPU, 'Value']
         DaskWorkerMemory: !Ref DaskWorkerMemory
+        DaskDashboardPort: !Ref DaskDashboardPort
+        AllowedIPRange: !Ref AllowedIPRange
   
 Outputs:
   JupyterNotebook:
