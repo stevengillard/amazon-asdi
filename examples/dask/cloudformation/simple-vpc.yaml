@@ -1,0 +1,166 @@
+# This template creates a simple VPC that can be used for HPC environments
+Parameters:
+  VPCCIDR:
+    Type: String
+    Default: 10.10.0.0/16
+    Description: IP address range for the VPC
+
+  PublicSubnetCIDR:
+    Type: String
+    Default: 10.10.0.0/24
+    Description: IP address range for the public subnet
+
+  PrivateSubnetCIDR:
+    Type: String
+    Default: 10.10.64.0/18
+    Description: IP address range for the private subnet
+
+  NameTagPrefix:
+    Type: String
+    Default: dask-fargate
+    Description: Prefix to use in name tags for easy identification
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: !Ref VPCCIDR
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      InstanceTenancy: default
+      Tags:
+        - Key: Name
+          Value: !Sub '${NameTagPrefix}/MyVpc'
+
+  PublicSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PublicSubnetCIDR
+      VpcId:
+        Ref: Vpc
+      AvailabilityZone:
+        Fn::Select:
+          - 0
+          - Fn::GetAZs: ""
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub '${NameTagPrefix}/PublicSubnet1'
+
+  PublicSubnet1RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: Vpc
+      Tags:
+        - Key: Name
+          Value: !Sub '${NameTagPrefix}/PublicSubnet1'
+
+  PublicSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: PublicSubnet1RouteTable
+      SubnetId:
+        Ref: PublicSubnet1
+
+  PublicSubnet1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: PublicSubnet1RouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId:
+        Ref: InternetGateway
+    DependsOn:
+      - VPCGatewayA
+
+  PublicSubnet1EIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: !Sub '${NameTagPrefix}/NATIP'
+
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: !Sub '${NameTagPrefix}/InternetGateway'
+
+  VPCGatewayA:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId:
+        Ref: Vpc
+      InternetGatewayId:
+        Ref: InternetGateway
+
+  NATGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt PublicSubnet1EIP.AllocationId
+      SubnetId: !Ref PublicSubnet1
+
+  PrivateSubnet1:
+    Type: AWS::EC2::Subnet
+    Properties:
+      CidrBlock: !Ref PrivateSubnetCIDR
+      VpcId:
+        Ref: Vpc
+      AvailabilityZone:
+        Fn::Select:
+          - 0
+          - Fn::GetAZs: ""
+      Tags:
+        - Key: Name
+          Value: !Sub '${NameTagPrefix}/PrivateSubnet1'
+
+  PrivateSubnet1RouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId:
+        Ref: Vpc
+      Tags:
+        - Key: Name
+          Value: !Sub '${NameTagPrefix}/PrivateSubnet1'
+
+  PrivateSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: PrivateSubnet1RouteTable
+      SubnetId:
+        Ref: PrivateSubnet1
+
+  PrivateSubnet1DefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId:
+        Ref: PrivateSubnet1RouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId:
+        Ref: NATGateway
+
+  PrivateSubnetS3Endpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      RouteTableIds:
+        - !Ref PrivateSubnet1RouteTable
+      ServiceName: !Sub 'com.amazonaws.${AWS::Region}.s3'
+      VpcId: !Ref Vpc
+
+Outputs:
+  VPCID:
+    Value: !Ref Vpc
+
+  PublicSubnetID:
+    Value: !Ref PublicSubnet1
+
+  PrivateSubnetID:
+    Value: !Ref PrivateSubnet1
+
+  NATIP:
+    Value: !Ref PublicSubnet1EIP
