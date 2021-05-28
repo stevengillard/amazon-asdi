@@ -48,7 +48,7 @@ Parameters:
   AllowedIPRange:
     Type: String
     Default: 0.0.0.0/0
-    Description: IP range to allow access through the security groups
+    Description: IP range to allow access to dask dashboard
 
 Conditions:
   DaskWorkerSpotPricingCondition: !Equals [!Ref DaskWorkerSpotPricing, 'YES']
@@ -480,6 +480,16 @@ Resources:
       TaskDefinition:
         Ref: WorkerDefinition
 
+  NotebookWaitHandle:
+    Type: AWS::CloudFormation::WaitConditionHandle
+
+  NotebookWaitCondition:
+    Type: AWS::CloudFormation::WaitCondition
+    Properties:
+      Count: 1
+      Handle: !Ref NotebookWaitHandle
+      Timeout: "900"
+
   SagemakerRole:
     Type: AWS::IAM::Role
     Properties:
@@ -512,7 +522,8 @@ Resources:
     Properties:
         OnStart:
         - Content:
-            Fn::Base64: |
+            Fn::Base64: 
+              Fn::Sub: |
                 #!/bin/sh
 
                 set -e
@@ -520,7 +531,7 @@ Resources:
                 #!/bin/bash
                 sleep 10
                 echo "\$(date) Creating daskpy3 conda environment"
-                echo "\$(date) Running in directory ${PWD}"
+                echo "\$(date) Running in directory \$(pwd)"
                 conda create --name daskpy3 python="3.7.9" -y
                 source activate daskpy3
                 conda install -c conda basemap proj4 nodejs ipywidgets -y 
@@ -534,6 +545,10 @@ Resources:
                 source activate JupyterSystemEnv
                 jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1
                 source /home/ec2-user/anaconda3/bin/deactivate
+                echo "\$(date) Signalling CloudFormation"
+                curl -X PUT -H 'Content-Type:' \
+                     --data-binary '{"Status":"SUCCESS","Reason":"Configuration Complete","UniqueId":"ID1","Data":"Notebook environment created"}' \
+                     "${NotebookWaitHandle}"
                 echo "\$(date) Finished!"
                 EOF
             
