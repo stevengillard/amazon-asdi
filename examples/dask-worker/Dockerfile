@@ -17,7 +17,7 @@ RUN conda install --yes \
     xarray==0.18.2 \
     bokeh==2.3.2 \
     s3fs==2021.5.0 \
-    fsspec==2021.6.0 \
+    fsspec==2021.5.0 \
     h5netcdf==0.11.0 \
     distributed==2021.6.0 \
     tornado==6.1 \ 
