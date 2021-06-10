@@ -1,30 +1,30 @@
 FROM quay.io/condaforge/miniforge3
 
-RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64
+RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.5/dumb-init_1.2.5_amd64
 RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda install --yes \
     -c conda-forge \
-    python==3.7.9 \
+    python==3.8.10 \
     python-blosc==1.10.2 \
-    dask==2021.1.1 \
+    dask==2021.6.0 \
     lz4==3.1.3 \
     nomkl==1.0 \
     msgpack-python==1.0.2 \
-    netcdf4==1.5.5.1 \
-    numpy==1.19.5 \
-    pandas==1.2.1 \
-    xarray==0.17.0 \
-    bokeh==2.2.3 \
-    s3fs==0.4.2 \
-    fsspec==0.7.4 \
-    h5netcdf==0.8.1 \
-    distributed==2021.1.1 \
+    netcdf4==1.5.6 \
+    numpy==1.20.3 \
+    pandas==1.2.4 \
+    xarray==0.18.2 \
+    bokeh==2.3.2 \
+    s3fs==2021.5.0 \
+    fsspec==2021.6.0 \
+    h5netcdf==0.11.0 \
+    distributed==2021.6.0 \
     tornado==6.1 \ 
     cloudpickle==1.6.0 \
     h5py==3.1.0 \
-    zarr==2.3.2 \
-    rechunker==0.3.2 \
+    zarr==2.8.1 \
+    rechunker==0.4.2 \
     && find /opt/conda/ -type f,l -name '*.a' -delete \
     && find /opt/conda/ -type f,l -name '*.pyc' -delete \
     && find /opt/conda/ -type f,l -name '*.js.map' -delete \
