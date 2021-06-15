@@ -1,0 +1,16 @@
+{
+    "AppImageConfigName": "custom-daskpy3-kernel-image-config",
+    "KernelGatewayImageConfig": {
+        "KernelSpecs": [
+            {
+                "Name": "python3",
+                "DisplayName": "Dask 2021.6.0 with Python3.8"
+            }
+        ],
+        "FileSystemConfig": {
+            "MountPath": "/home/sagemaker-user",
+            "DefaultUid": 1000,
+            "DefaultGid": 100
+        }
+    }
+}

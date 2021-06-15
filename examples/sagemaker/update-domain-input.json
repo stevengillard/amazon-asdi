@@ -1,0 +1,13 @@
+{
+    "DomainId": "d-qchfzmootzra",
+    "DefaultUserSettings": {
+        "KernelGatewayAppSettings": {
+            "CustomImages": [
+                {
+                    "ImageName": "dask-2021.6.0",
+                    "AppImageConfigName": "custom-daskpy3-kernel-image-config"
+                }
+            ]
+        }
+    }
+}
