@@ -1,7 +1,7 @@
 # Lab 2: Build your custom dask container image
 This lab will step you through the process of building a container image and uploading it to the AWS Elastic Container Registry (ECR) service so that it can be deployed.
 
-**Note** An auomated build pipeline is also available in [this CloudFormation template](cloudformation/dask-pipeline.yaml) if you wish to simplify the process and avoid the manual steps.  
+**Note** An automated build pipeline is also available in [this CloudFormation template](cloudformation/dask-pipeline.yaml) if you wish to simplify the process and avoid the manual steps.  
 
 ## Create a new Container Repository
 Switch back to your AWS console browser tab, or open a new tab and access the AWS console. 

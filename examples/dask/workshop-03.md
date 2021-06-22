@@ -1,11 +1,11 @@
 # Lab 3: Build the dask infrastructure
 In this lab, we will spin up the infrastructure resources necessary to run our dask container in distributed mode.  This includes:
- * A Virtual Private Cloud with a public and private subnet
- * Internet Gateway, NAT Gateway and S3 endpoint resources to facilitate connectivity in and out of the VPC
- * Security Groups with ingress rules to control traffic
- * An Elastic Container Service cluster
- * Task definitions for the dask scheduler and dask workers
- * A SageMaker Notebook instance, connected to the VPC
+ * A [Virtual Private Cloud](https://aws.amazon.com/vpc/) (VPC) with a single public and private subnet
+ * [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html), [NAT Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) and [S3 gateway endpoint](https://docs.aws.amazon.com/vpc/latest/privatelink/vpce-gateway.html) resources to facilitate connectivity in and out of the VPC
+ * [Security Groups](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) (a virtual firewall) with ingress rules to control traffic
+ * An [Elastic Container Service](https://aws.amazon.com/ecs/) cluster
+ * [Task definitions](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) for the dask scheduler and dask workers
+ * A [SageMaker Notebook instance](https://docs.aws.amazon.com/sagemaker/latest/dg/nbi.html), connected to the VPC
 
 We'll use a CloudFormation template to deploy these resources, as setting everything up through the AWS console will be time consuming and error-prone - using an infrastructure as code tool is a much better approach!
 

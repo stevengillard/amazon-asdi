@@ -21,11 +21,13 @@ This lab will get you connected to the notebook so you can access the dask envir
     ![JupyterHub](workshop/0404-JupyterHubMain.png)
 
 ## Run the ERA5 notebook 
-1. In JupyterHub, navigate to the `amazon-asdi/examples/dask/notebooks` folder.  Double click on the **era5-cleared.pynb** notebook file to open it.
+1. In JupyterHub, navigate to the `amazon-asdi/examples/dask/notebooks` folder.  Double click on the **era5-workshop.pynb** notebook file to open it.
 
     ![OpenNotebook](workshop/0405-OpenNotebook.png)
 
 1. Make sure that the `conda_daskpy3` kernel is selected.  If not, change the kernel and select it.
+
+    **Note** this kernel is re-created every time you start the SageMaker notebook instance, and can take up to 10 minutes.  You can open a terminal from within JupyterLab and monitor progress with `tail output.log`.
 
     ![NotebookKernel](workshop/0406-NotebookKernel.png)
 
@@ -45,7 +47,7 @@ This lab will get you connected to the notebook so you can access the dask envir
 
     ![DaskWorkers](workshop/0410-DaskWorkers.png)
 
-1. Return to your notebook instance tab and continue executing the steps.  You'll be taken through a series of introductory operations, opening files, loading datasets and displaying some information about the objects.  When you reach the `temp_mean.persist()` step, your dask tasks will being execution.
+1. Return to your notebook instance tab and continue executing the steps.  You'll be taken through a series of introductory operations, opening files, loading datasets and displaying some information about the objects.  When you reach the `client.persist()` step, your dask tasks will being execution.  The first one of these loads all data into dask worker memory, as explained in the notebook.
 
     ![DaskJob](workshop/0411-DaskJob.png)
 
@@ -55,6 +57,29 @@ This lab will get you connected to the notebook so you can access the dask envir
 
     The task will take 4-5 minutes to complete.
 
-1. Once complete, the next step will display a plot of the mean temperature for all points
+1. Once data is loaded, the notebook will guide you through a number of calculations on the data, including:
+    * Conversion of the temperature units from K to C (a simple substraction - but over **54 billion** calculations!)
+    * Calculation of the mean and standard deviation of temperature for every point
+    * Extraction of time series data for specific points into a table format and plotted as a line graph
 
-    ![DaskProgress](workshop/0413-ResultPlot.png)
+    Below are some of the screenshots.
+
+    Mean calculation
+
+    ![MeanCalculation](workshop/0413-MeanCalculation.png)
+
+    Plot of the average temperature
+ 
+    ![MeanPlot](workshop/0413-ResultPlot.png)
+
+    Plot of the standard deviation
+
+    ![StddevPlot](workshop/0414-StddevPlot.png)
+
+    Line plot of temperatures in specific locations
+
+    ![LinePlot](workshop/0415-LinePlot.png)
+
+1. As an additional exercise, try increasing the number of workers in the cluster to 72 and repeating the calculations - how much faster do they run?  You can restart the notebook by selecting **Kernel** -> **Restart Kernel and Clear All Outputs** from the JupyterHub menu bar.
+
+    ![Restart](workshop/0416-RestartKernel.png)
