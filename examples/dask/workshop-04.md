@@ -83,3 +83,8 @@ This lab will get you connected to the notebook so you can access the dask envir
 1. As an additional exercise, try increasing the number of workers in the cluster to 72 and repeating the calculations - how much faster do they run?  You can restart the notebook by selecting **Kernel** -> **Restart Kernel and Clear All Outputs** from the JupyterHub menu bar.
 
     ![Restart](workshop/0416-RestartKernel.png)
+
+## Clean-up
+When you're finished, make sure you shut down the resources to avoid incurring costs.
+
+Refer to the steps [here](workshop-05.md)

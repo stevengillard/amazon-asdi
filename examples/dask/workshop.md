@@ -32,3 +32,5 @@ For the purposes of the workshop some of the steps will be performed manually, t
 [Lab 3 - Create the dask ECS environment](workshop-03.md)
 
 [Lab 4 - Process data using the SageMaker Notebook](workshop-04.md)
+
+[Clean up and delete all resources](workshop-05.md)
