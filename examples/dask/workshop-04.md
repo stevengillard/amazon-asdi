@@ -35,15 +35,15 @@ This lab will get you connected to the notebook so you can access the dask envir
 
     ![NotebookExecute](workshop/0407-NotebookExecute.png)
 
-1. Pay attention to the text on each cell and follow what it says.  In the 3rd step you'll scale out the number of dask cluster workers.  By default the notebook creates 48 Fargate tasks.  You'll want to shut these down if you decide not to finish with the notebook - for that you'll need to skip to the step at the end.
-
-    ![ECSScaleOut](workshop/0408-ECSScaleOut.png)
-
-1. The scale out will take a minute or two.  The next two steps will display some information about your cluster, as well as the external URL of the dask scheduler.  Click on the scheduler URL and open it in another browser tab.
+1. During the early steps you'll start the scheduler (which may be running already).  This step will also display some information about your cluster, including the external URL of the scheduler dashboard.  Click on the scheduler URL to open it in another browser tab.  Make sure you can access it.
 
     ![DaskScheduler](workshop/0409-DaskScheduler.png)
 
-1. Make sure you can access the dask scheduler.  Click on the **Workers** tab to see your 48 workers.  There won't be much happening for now, but we'll switch back to this page later.
+1. You'll scale out the number of dask cluster workers.  By default the notebook creates 48 Fargate tasks.  You'll want to shut these down if you decide not to finish with the notebook - for that you'll need to skip to the step at the end.
+
+    ![ECSScaleOut](workshop/0408-ECSScaleOut.png)
+
+1. This step will take a few minutes.  In the meantime return to the dashboard tab and click on the **Workers** tab to see your workers starting.  There won't be much happening for now, but we'll switch back to this page later.
 
     ![DaskWorkers](workshop/0410-DaskWorkers.png)
 

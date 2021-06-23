@@ -8,7 +8,7 @@ If you plan to use the environment again later, you can leave the resources in p
 
     ![ShutdownWorkers](workshop/0501-StopWorkers.png)
 
-1. Optionally, stop the dask scheduler task.  The dask client will throw an exception, but this is expected.  If you want to restart the scheduler later simply change `desiredCount=1` in this cell and re-run it (**Note** this can also be done through the AWS ECS console):
+1. Optionally, close the client and stop the dask scheduler task.
 
     ![StopScheduler](workshop/0506-StopScheduler.png)
 
