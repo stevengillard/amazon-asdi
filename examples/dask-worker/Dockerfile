@@ -5,31 +5,33 @@ RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda install --yes \
     -c conda-forge \
-    python==3.7.9 \
+    python==3.8.10 \
     python-blosc==1.10.2 \
-    dask==2021.1.1 \
+    dask==2021.6.2 \
+    distributed==2021.6.2 \
     lz4==3.1.3 \
     nomkl==1.0 \
     msgpack-python==1.0.2 \
-    netcdf4==1.5.5.1 \
-    numpy==1.19.5 \
-    pandas==1.2.1 \
-    xarray==0.17.0 \
-    bokeh==2.2.3 \
-    s3fs==0.4.2 \
-    fsspec==0.7.4 \
+    netcdf4==1.5.7 \
+    numpy==1.21.0 \
+    pandas==1.3.0 \
+    xarray==0.18.2 \
+    bokeh==2.3.2 \
+    s3fs==2021.6.1 \
+    fsspec==2021.6.1 \
     h5netcdf==0.11.0 \
-    distributed==2021.6.0 \
     tornado==6.1 \ 
     cloudpickle==1.6.0 \
-    h5py==3.1.0 \
-    zarr==2.8.1 \
+    h5py==3.3.0 \
+    zarr==2.8.3 \
     rechunker==0.4.2 \
     && find /opt/conda/ -type f,l -name '*.a' -delete \
     && find /opt/conda/ -type f,l -name '*.pyc' -delete \
     && find /opt/conda/ -type f,l -name '*.js.map' -delete \
     && find /opt/conda/lib/python*/site-packages/bokeh/server/static -type f,l -name '*.js' -not -name '*.min.js' -delete \
     && rm -rf /opt/conda/pkgs
+
+COPY fsspec/*.py /opt/conda/lib/python3.9/site-packages/fsspec/
 
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh

@@ -10,7 +10,7 @@ distributed:
     allowed-failures: 10
 
   admin:
-    log-format: '%(name)s - %(levelname)s - %(message)s'
+    log-format: '%(asctime)s - %(threadName)s - %(name)s - %(levelname)s - %(funcName)s -- %(message)s'
     tick:
       interval: 20ms  
       limit: 20s
