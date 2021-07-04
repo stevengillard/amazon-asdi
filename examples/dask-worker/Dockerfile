@@ -12,11 +12,11 @@ RUN conda install --yes \
     lz4==3.1.3 \
     nomkl==1.0 \
     msgpack-python==1.0.2 \
-    netcdf4==1.5.5.1 \
-    numpy==1.19.5 \
-    pandas==1.2.1 \
-    xarray==0.17.0 \
-    bokeh==2.2.3 \
+    netcdf4==1.5.6 \
+    numpy==1.20.3 \
+    pandas==1.2.4 \
+    xarray==0.18.2 \
+    bokeh==2.3.2 \
     s3fs==0.4.2 \
     fsspec==0.7.4 \
     h5netcdf==0.11.0 \
