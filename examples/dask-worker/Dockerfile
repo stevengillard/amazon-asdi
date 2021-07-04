@@ -31,7 +31,7 @@ RUN conda install --yes \
     && find /opt/conda/lib/python*/site-packages/bokeh/server/static -type f,l -name '*.js' -not -name '*.min.js' -delete \
     && rm -rf /opt/conda/pkgs
 
-COPY fsspec/*.py /opt/conda/lib/python3.9/site-packages/fsspec/
+COPY fsspec/*.py /opt/conda/lib/python3.8/site-packages/fsspec/
 
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
