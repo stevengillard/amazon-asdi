@@ -7,7 +7,8 @@ RUN conda install --yes \
     -c conda-forge \
     python==3.7.9 \
     python-blosc==1.10.2 \
-    dask==2021.1.1 \
+    dask==2021.6.1 \
+    distributed==2021.6.1 \
     lz4==3.1.3 \
     nomkl==1.0 \
     msgpack-python==1.0.2 \
@@ -19,7 +20,6 @@ RUN conda install --yes \
     s3fs==0.4.2 \
     fsspec==0.7.4 \
     h5netcdf==0.11.0 \
-    distributed==2021.6.0 \
     tornado==6.1 \ 
     cloudpickle==1.6.0 \
     h5py==3.1.0 \
