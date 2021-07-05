@@ -2,7 +2,7 @@ Parameters:
   SagemakerCodeRepo:
     Type: String
     Description: Github Repository for loading into the Sagemaker Jupyter environment
-    Default: https://github.com/awslabs/amazon-asdi.git
+    Default: https://github.com/stevengillard/amazon-asdi.git
 
   SagemakerNotebookInstance:
     Type: String
@@ -34,7 +34,7 @@ Parameters:
 
   DaskWorkerSpotPricing:
     Type: String
-    Default: 'NO'
+    Default: 'YES'
     Description: Use Fargate spot pricing for dask workers, to save money (workers may be terminated)
     AllowedValues:
       - 'YES'
