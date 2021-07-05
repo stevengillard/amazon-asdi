@@ -12,10 +12,10 @@ Parameters:
       - ml.t3.large
       - ml.t3.xlarge
       - ml.t3.2xlarge
-      - ml.m5.large
+      - ml.m5.xlarge
       - ml.m5.2xlarge
       - ml.m5.4xlarge
-    Default: ml.m5.2xlarge
+    Default: ml.t3.large
 
   DaskImage:
     Type: String
