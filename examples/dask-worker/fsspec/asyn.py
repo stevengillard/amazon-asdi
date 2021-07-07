@@ -66,8 +66,8 @@ def sync(loop, func, *args, timeout=None, **kwargs):
     # in deadlock in some cases.
     global taskcount
     with gclock:
-        if gc.isenabled():
-            gc.disable()
+        #if gc.isenabled():
+        #    gc.disable()
         taskcount += 1
 
     logger.debug("submitting task %s to fsspecIO thread, %d concurrent tasks now running", coro, taskcount)
@@ -83,8 +83,8 @@ def sync(loop, func, *args, timeout=None, **kwargs):
 
     with gclock:
         taskcount -= 1
-        if taskcount == 0:
-            gc.enable()
+        #if taskcount == 0:
+        #    gc.enable()
 
     if timeout is not None:
         if timeout < 0:
