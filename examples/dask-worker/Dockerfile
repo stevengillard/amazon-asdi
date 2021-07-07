@@ -32,6 +32,7 @@ RUN conda install --yes \
     && rm -rf /opt/conda/pkgs
 
 COPY fsspec/*.py /opt/conda/lib/python3.8/site-packages/fsspec/
+COPY distributed/*.py /opt/conda/lib/python3.8/site-packages/distributed/
 
 COPY prepare.sh /usr/bin/prepare.sh
 RUN chmod +x /usr/bin/prepare.sh
