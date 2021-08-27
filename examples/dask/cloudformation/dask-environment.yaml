@@ -19,8 +19,8 @@ Parameters:
 
   DaskImage:
     Type: String
-    Default: daskdev/dask:latest
-    Description: Container image to use for the Dask workers before our custom image is built
+    Default: public.ecr.aws/j7x5r0l2/aws-dask-workshop:latest
+    Description: Container image to use for the Dask workers
 
   DaskWorkerCPU:
     Type: String

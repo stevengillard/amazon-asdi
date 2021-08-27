@@ -24,11 +24,15 @@ We'll use the AWS console to deploy the template, but it can be done via the CLI
 
 1. Select **Template is ready** and **Upload a template file**
 
-1. Navigate to the location of the `dask-environment.yaml` file and select it (if using Cloud9 you may need to download the file to your computer first - simply right click and select **Download**).  The file will be uploaded to S3 automatically, and the location will appear.  Click **Next** when ready.
+1. Navigate to the location of the [dask-environment.yaml](dask-environment.yaml) file and select it (you may need to download the file to your computer first - either from github or if you are in Cloud9 simply right click and select **Download**).  The file will be uploaded to S3 automatically, and the location will appear.  Click **Next** when ready.
 
     ![SelectTemplate](workshop/0303-CloudFormationCreate2.png)
 
-1. Enter a name for the stack, and change the `DaskImage` parameter value to your custom image URI (which you created in the previous step). Click **Next** when ready. 
+1. Enter a name for the stack.  Optionally change the `DaskImage` parameter value to your custom image URI (if you created one in the previous lab).  
+
+   Alternatively you can leave the default `DaskImage` value, which is a pre-built public image stored in Amazon ECR `public.ecr.aws/j7x5r0l2/aws-dask-workshop:latest` Click **Next** when ready. 
+
+   Examine the other parameter values but there is no need to change them - you may accept the defaults.
 
     ![Parameters](workshop/0304-CloudFormationParameters.png)
 

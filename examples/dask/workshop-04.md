@@ -49,6 +49,10 @@ This lab will get you connected to the notebook so you can access the dask envir
 
     ![DaskWorkers](workshop/0410-DaskWorkers.png)
 
+   You can also view your cluster on the AWS ECS console: https://console.aws.amazon.com/ecs/home?region=us-east-1#/clusters
+
+    ![ECSCluster](workshop/041005-ECSCluster.png)
+
 1. Return to your notebook instance tab and continue executing the steps.  You'll be taken through a series of introductory operations, opening files, loading datasets and displaying some information about the objects.  Eventually you'll see a graphic like the following, which gives you an understanding of the number of dask tasks that are queued up.
 
     In this case you can see that the data array will be nearly 68GiB in size, with 2456 tasks to be executed across 1216 chunks of data.  
