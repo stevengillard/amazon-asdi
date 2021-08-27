@@ -24,7 +24,7 @@ We'll use the AWS console to deploy the template, but it can be done via the CLI
 
 1. Select **Template is ready** and **Upload a template file**
 
-1. Navigate to the location of the [dask-environment.yaml](dask-environment.yaml) file and select it (you may need to download the file to your computer first - either from github or if you are in Cloud9 simply right click and select **Download**).  The file will be uploaded to S3 automatically, and the location will appear.  Click **Next** when ready.
+1. Navigate to the location of the [dask-environment.yaml](cloudformation/dask-environment.yaml) file and select it (you may need to download the file to your computer first - either from github or if you are in Cloud9 simply right click and select **Download**).  The file will be uploaded to S3 automatically, and the location will appear.  Click **Next** when ready.
 
     ![SelectTemplate](workshop/0303-CloudFormationCreate2.png)
 
