@@ -5,25 +5,25 @@ RUN chmod +x /usr/local/bin/dumb-init
 
 RUN conda install --yes \
     -c conda-forge \
-    python==3.7.9 \
+    python==3.8.10 \
     python-blosc==1.10.2 \
-    dask==2021.6.1 \
-    distributed==2021.6.1 \
+    dask==2021.8.1 \
+    distributed==2021.8.1 \
     lz4==3.1.3 \
     nomkl==1.0 \
     msgpack-python==1.0.2 \
-    netcdf4==1.5.6 \
-    numpy==1.20.3 \
-    pandas==1.2.4 \
-    xarray==0.18.2 \
-    bokeh==2.3.2 \
+    netcdf4==1.5.7 \
+    numpy==1.21.2 \
+    pandas==1.3.2 \
+    xarray==0.19.0 \
+    bokeh==2.3.3 \
     s3fs==0.4.2 \
     fsspec==0.7.4 \
     h5netcdf==0.11.0 \
     tornado==6.1 \ 
     cloudpickle==1.6.0 \
-    h5py==3.1.0 \
-    zarr==2.8.1 \
+    h5py==3.3.0 \
+    zarr==2.8.3 \
     rechunker==0.4.2 \
     && find /opt/conda/ -type f,l -name '*.a' -delete \
     && find /opt/conda/ -type f,l -name '*.pyc' -delete \
