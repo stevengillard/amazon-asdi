@@ -10,7 +10,7 @@ Once the environment is running, you will step through some large-scale data pro
  * Extraction of time-series temperature data for specific locations into a dataframe table
 
 During the workshop you will:
-1. Set up your cloud development environment using the [AWS Cloud9](https://aws.amazon.com/cloud9/) browser based development environment (IDE)
+1. Optionally, set up your cloud development environment using the [AWS Cloud9](https://aws.amazon.com/cloud9/) browser based development environment (IDE)
 1. Create your customised Dask container image using [Docker](https://www.docker.com), and publish it to the [Amazon Elastic Container Registry](https://aws.amazon.com/ecr/) (ECR) service
 1. Deploy the Dask environment using the provided [AWS CloudFormation](https://aws.amazon.com/cloudformation/) "infrastructure-as-code" template.  This template sets up the following services:
     * An [Amazon Virtual Private Cloud](https://aws.amazon.com/vpc/) network, with two subnets for the Dask scheduler and Dask worker tasks, as well as an Internet Gateway, NAT Gateway and S3 endpoint to facilitate connectivity with external resources
@@ -23,7 +23,14 @@ During the workshop you will:
 * Familiarity with Linux, Docker containers and Python
 
 ## Workshop Labs Part 1 - Build a custom container image
-The following labs are optional.  They will guide you through using Cloud9 and Docker to create a customised Dask container image, which will be uploaded to the Amazon Elastic Container Registry ready for deployment.  A public image is provided if you'd prefer to skip these steps and proceed straight to [Lab 3 - Create the Dask ECS environment](workshop-03.md).
+In this workshop we are running Dask in a container with a number of other python modules for processing NetCDF format data such as [h5netcdf](https://github.com/h5netcdf/h5netcdf) and [xarray](http://xarray.pydata.org/en/stable/).
+
+To be able to run Dask in a container, you first need a container image.  There are 3 options:
+1. Use a public container image.  For this option, you can skip the first two labs and proceed straight to [Lab 3 - Create the Dask ECS environment](workshop-03.md) and use the default image when deploying the CloudFormation template.
+1. Build an image yourself, using [Docker](https://docker.com).  Labs 1 and 2 step through this process.
+1. Deploy the [`dask-pipeline.yaml` CloudFormation Template](cloudformation/dask-pipeline.yaml) which creates an automated pipeline to build the container image using the [AWS CodePipeline](https://aws.amazon.com/codepipeline/) and [CodeBuild](https://aws.amazon.com/codebuild/) services.  This automates the steps in labs 1 and 2 below.
+
+The following labs will guide you through using Cloud9 and Docker to create a customised Dask container image, which will be uploaded to the Amazon Elastic Container Registry ready for deployment.  Feel free to skip ahead to [Lab 3 - Create the Dask ECS environment](workshop-03.md) and use the provided public image if you'd prefer.
 
 ### [Lab 1 - Setup your cloud development environment](workshop-01.md)
 
@@ -42,5 +49,3 @@ This is where the fun starts - deploy the Dask into an AWS VPC running on the Am
 ## Architecture
 The workshop is based on the Dask ECS environment as shown in the diagram below.
 ![architecture](cloudformation/dask-architecture.png)
-
-For the purposes of the workshop some of the steps will be performed manually, to help you understand some of the moving parts in more detail.
