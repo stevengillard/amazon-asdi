@@ -541,7 +541,7 @@ Resources:
               conda activate daskpy3
 
               echo "\$(date) Installing packages using micromamba"
-              conda install -c conda micromamba -y 
+              conda install -c conda-forge micromamba -y 
               micromamba install -c conda basemap nodejs ipywidgets -y 
 
               echo "\$(date) Installing packages using pip"
