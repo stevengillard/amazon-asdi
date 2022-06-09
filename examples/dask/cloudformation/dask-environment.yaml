@@ -549,6 +549,7 @@ Resources:
 
               echo "\$(date) Installing Jupyter kernel"
               python -m ipykernel install --user --name daskpy3 --display-name "conda_daskpy3"
+              source "$WORKING_DIR/miniconda/bin/deactivate"
 
               echo "\$(date) Signalling CloudFormation"
               curl -X PUT -H 'Content-Type:' \
@@ -566,6 +567,8 @@ Resources:
           Fn::Base64: |
             #!/bin/sh
             set -e
+            WORKING_DIR=/home/ec2-user/SageMaker/custom-miniconda
+
             cat > /home/ec2-user/setup.sh << EOF
             #!/bin/bash
 
@@ -573,9 +576,16 @@ Resources:
             cp ~/.jupyter/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py.bak
             echo "c.NotebookApp.iopub_data_rate_limit = 10000000000" >> ~/.jupyter/jupyter_notebook_config.py
             echo "c.NotebookApp.iopub_msg_rate_limit = 10000000000" >> ~/.jupyter/jupyter_notebook_config.py
+            echo "c.EnvironmentKernelSpecManager.use_conda_directly = False" >> ~/.jupyter/jupyter_notebook_config.py
+            rm /home/ec2-user/.condarc
+
+            echo "\$(date) Installing Jupyter kernel"
+            source "$WORKING_DIR/miniconda/bin/activate" daskpy3
+            python -m ipykernel install --user --name daskpy3 --display-name "conda_daskpy3"
+            source "$WORKING_DIR/miniconda/bin/deactivate"
 
             echo "\$(date) Installing JupyterLab-manager widget"
-            source activate JupyterSystemEnv
+            source /home/ec2-user/anaconda3/bin/activate JupyterSystemEnv
             jupyter labextension install @jupyter-widgets/jupyterlab-manager@3.1.0
             source /home/ec2-user/anaconda3/bin/deactivate
             EOF
