@@ -70,7 +70,7 @@ This lab will get you connected to the notebook so you can access the dask envir
     The task will take 4-5 minutes to complete.
 
 1. Once data is loaded, the notebook will guide you through a number of calculations on the data, including:
-    * Conversion of the temperature units from K to C (a simple substraction - but over **18 billion** calculations!)
+    * Conversion of the temperature units from K to C (a simple substraction - but over **9 billion** calculations for a 1-year dataset!)
     * Calculation of the mean and standard deviation of temperature for every point
     * Extraction of time series data for specific points into a table format and plotted as a line graph
 
@@ -92,7 +92,7 @@ This lab will get you connected to the notebook so you can access the dask envir
 
     ![LinePlot](workshop/0415-LinePlot.png)
 
-1. As an additional exercise, try increasing the number of workers in the cluster to 72 and repeating the calculations - how much faster do they run?  You can restart the notebook by selecting **Kernel** -> **Restart Kernel and Clear All Outputs** from the JupyterHub menu bar.
+1. As an additional exercise, try increasing the number of workers in the cluster to 24 and repeating the calculations - how much faster do they run?  What about on a larger dataset of 2 years?  You can restart the notebook by selecting **Kernel** -> **Restart Kernel and Clear All Outputs** from the JupyterHub menu bar.
 
     ![Restart](workshop/0416-RestartKernel.png)
 
