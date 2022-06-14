@@ -92,9 +92,16 @@ This lab will get you connected to the notebook so you can access the dask envir
 
     ![LinePlot](workshop/0415-LinePlot.png)
 
-1. As an additional exercise, try increasing the number of workers in the cluster to 24 and repeating the calculations - how much faster do they run?  What about on a larger dataset of 2 years?  You can restart the notebook by selecting **Kernel** -> **Restart Kernel and Clear All Outputs** from the JupyterHub menu bar.
+1. Now try the Zarr version of the same notebook.  How much faster does it run?  First restart or shutdown your existing notebook by selecting **Kernel** -> **Restart Kernel and Clear All Outputs** from the JupyterHub menu bar, this will trigger the dask workers to release their memory.
 
     ![Restart](workshop/0416-RestartKernel.png)
+
+    ![ZarrNotebook](workshop/041501-ZarrNotebook.png)
+
+1. As an additional exercise, try increasing the number of workers in the cluster to 24 and repeating the calculations - how much faster do they run?  What about increasing the dataset size by expanding over multiple years?  (Don't forget to restart the kernel as you did above before you try, otherwise the dask workers will retain their memory).
+
+    ![BiggerCluster](workshop/041701-Cluster24.png)
+    ![MoreData](workshop/0417-ExpandDataset.png)
 
 ## Clean-up
 When you're finished, make sure you shut down the resources to avoid incurring costs.
