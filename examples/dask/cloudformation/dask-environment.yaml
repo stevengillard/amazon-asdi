@@ -539,6 +539,7 @@ Resources:
               source "$WORKING_DIR/miniconda/bin/activate"
               conda create --yes --name daskpy3 python="3.10.4"
               conda activate daskpy3
+              echo "python ==3.10.4" >> $WORKING_DIR/miniconda/envs/daskpy3/conda-meta/pinned
 
               echo "\$(date) Installing packages using micromamba"
               conda install -c conda-forge micromamba -y 
@@ -579,15 +580,11 @@ Resources:
             echo "c.EnvironmentKernelSpecManager.use_conda_directly = False" >> ~/.jupyter/jupyter_notebook_config.py
             rm /home/ec2-user/.condarc
 
-            echo "\$(date) Installing Jupyter kernel"
+            echo "\$(date) Re-installing Jupyter kernel"
             source "$WORKING_DIR/miniconda/bin/activate" daskpy3
             python -m ipykernel install --user --name daskpy3 --display-name "conda_daskpy3"
             source "$WORKING_DIR/miniconda/bin/deactivate"
 
-            echo "\$(date) Installing JupyterLab-manager widget"
-            source /home/ec2-user/anaconda3/bin/activate JupyterSystemEnv
-            jupyter labextension install @jupyter-widgets/jupyterlab-manager@3.1.0
-            source /home/ec2-user/anaconda3/bin/deactivate
             echo "\$(date) Finished!"
             EOF
             
