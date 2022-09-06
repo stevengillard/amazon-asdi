@@ -6,27 +6,29 @@ RUN chmod +x /usr/local/bin/dumb-init
 RUN conda install --yes \
     -c conda-forge \
     python==3.10.4 \
-    python-blosc==1.10.2 \
-    dask==2022.5.2 \
-    distributed==2022.5.2 \
-    lz4==3.1.3 \
+    python-blosc==1.10.6 \
+    dask==2022.9.0 \
+    distributed==2022.9.0 \
+    kerchunk==0.0.7 \
+    ujson==5.4.0 \
+    lz4==4.0.0 \
     nomkl==1.0 \
     msgpack-python==1.0.4 \
-    netcdf4==1.5.8 \
-    numpy==1.22.4 \
-    pandas==1.4.2 \
-    xarray==2022.3.0 \
+    netcdf4==1.6.0 \
+    numpy==1.23.2 \
+    pandas==1.4.4 \
+    xarray==2022.6.0 \
     bokeh==2.4.3 \
-    s3fs==2022.5.0 \
-    fsspec==2022.5.0 \
-    h5netcdf==1.0.0 \
-    tornado==6.1 \ 
+    s3fs==2022.8.2 \
+    fsspec==2022.8.2 \
+    h5netcdf==1.0.2 \
+    tornado==6.2 \ 
     cloudpickle==2.1.0 \
-    h5py==3.6.0 \
-    zarr==2.11.3 \
+    h5py==3.7.0 \
+    zarr==2.12.0 \
     rechunker==0.5.0 \
     intake-esm==2021.8.17 \
-    intake==0.6.5 \
+    intake==0.6.6 \
     && find /opt/conda/ -type f,l -name '*.a' -delete \
     && find /opt/conda/ -type f,l -name '*.pyc' -delete \
     && find /opt/conda/ -type f,l -name '*.js.map' -delete \
