@@ -50,8 +50,13 @@ Parameters:
     Default: 0.0.0.0/0
     Description: IP range to allow access to dask dashboard
 
+  AllowedPrefixList:
+    Type: String
+    Description: Prefix list to allow access to dask dashboard (instead of IP range)
+
 Conditions:
   DaskWorkerSpotPricingCondition: !Equals [!Ref DaskWorkerSpotPricing, 'YES']
+  UsePrefixList: !Not [!Equals [!Ref AllowedPrefixList, '']]
 
 Resources:
   DaskVpc:
@@ -344,7 +349,16 @@ Resources:
           Description: Allow all outbound traffic by default
           IpProtocol: "-1"
       SecurityGroupIngress:
-        - CidrIp: !Ref AllowedIPRange
+        - CidrIp:
+            Fn::If:
+              - UsePrefixList
+              - !Ref AWS::NoValue
+              - !Ref AllowedIPRange 
+          SourcePrefixListId:
+            Fn::If:
+              - UsePrefixList
+              - !Ref AllowedPrefixList
+              - !Ref AWS::NoValue
           Description: Allow access to the dask dashboard
           FromPort: !Ref DaskDashboardPort
           IpProtocol: tcp
@@ -546,7 +560,7 @@ Resources:
               micromamba install -c conda-forge basemap nodejs ipywidgets==7.7.1 -y 
 
               echo "\$(date) Installing packages using pip"
-              pip install botocore==1.27.59 aiobotocore==2.4.0 zarr==2.12.0 rechunker==0.5.0 ipykernel==6.15.2 matplotlib==3.5.3 boto3==1.24.59 dask==2022.9.0 distributed==2022.9.0 tornado==6.1 cloudpickle==2.1.0 msgpack==1.0.4 blosc==1.10.6 numpy==1.23.2 pandas==1.4.4 lz4==4.0.0 netcdf4==1.6.0 xarray==2022.6.0 bokeh==2.4.3 s3fs==2022.8.2 fsspec==2022.8.2 h5netcdf==1.0.2 h5py==3.7.0 intake-esm==2021.8.17 intake==0.6.6
+              pip install botocore==1.27.59 aiobotocore==2.4.0 zarr==2.12.0 rechunker==0.5.0 ipykernel==6.15.2 matplotlib==3.5.3 boto3==1.24.59 dask==2022.9.0 distributed==2022.9.0 kerchunk==0.0.8 ujson==5.4.0 tornado==6.1 cloudpickle==2.1.0 msgpack==1.0.4 blosc==1.10.6 numpy==1.23.2 pandas==1.4.4 lz4==4.0.0 netcdf4==1.6.0 xarray==2022.6.0 bokeh==2.4.3 s3fs==2022.8.2 fsspec==2022.8.2 h5netcdf==1.0.2 h5py==3.7.0 intake-esm==2021.8.17 intake==0.6.6
 
               echo "\$(date) Installing Jupyter kernel"
               python -m ipykernel install --user --name daskpy3 --display-name "conda_daskpy3"
