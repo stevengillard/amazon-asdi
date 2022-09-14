@@ -42,7 +42,7 @@ Parameters:
 
   DaskDashboardPort:
     Type: Number
-    Default: 8787
+    Default: 80
     Description: Port number to use for dask dashboard HTTP interface
 
   AllowedIPRange:
